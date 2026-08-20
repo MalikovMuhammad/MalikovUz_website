@@ -288,7 +288,7 @@
         </div>
       </div>
 
-      <form class="contact-form" id="contactForm" novalidate>
+      <form class="contact-form" id="contactForm" novalidate data-endpoint="https://malikov-contact-form.muhammad-malikov.workers.dev">
         <div class="form-row">
           <label for="name" data-i18n="form.nameLabel">Ismingiz</label>
           <input type="text" id="name" name="name" required data-i18n-attr="placeholder:form.namePlaceholder" placeholder="Ismingizni kiriting">
@@ -301,8 +301,9 @@
           <label for="message" data-i18n="form.messageLabel">Xabar</label>
           <textarea id="message" name="message" rows="4" data-i18n-attr="placeholder:form.messagePlaceholder" placeholder="Loyihangiz haqida qisqacha yozing"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-block" data-i18n="form.submit">Yuborish</button>
+        <button type="submit" class="btn btn-primary btn-block" id="formSubmit" data-i18n="form.submit">Yuborish</button>
         <p class="form-success" id="formSuccess" data-i18n="form.success">Rahmat! Tez orada siz bilan bog'lanamiz.</p>
+        <p class="form-error" id="formError" data-i18n="form.error">Xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring yoki bevosita bog'laning.</p>
       </form>
     </div>
   </section>

@@ -75,7 +75,9 @@
       'form.messageLabel': "Xabar",
       'form.messagePlaceholder': "Loyihangiz haqida qisqacha yozing",
       'form.submit': "Yuborish",
+      'form.sending': "Yuborilmoqda...",
       'form.success': "Rahmat! Tez orada siz bilan bog'lanamiz.",
+      'form.error': "Xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring yoki bevosita bog'laning.",
 
       'footer.copy': "© 2026 Analitika. Barcha huquqlar himoyalangan."
     },
@@ -152,7 +154,9 @@
       'form.messageLabel': "Сообщение",
       'form.messagePlaceholder': "Кратко опишите ваш проект",
       'form.submit': "Отправить",
+      'form.sending': "Отправка...",
       'form.success': "Спасибо! Мы свяжемся с вами в ближайшее время.",
+      'form.error': "Произошла ошибка. Попробуйте позже или свяжитесь с нами напрямую.",
 
       'footer.copy': "© 2026 Аналитика. Все права защищены."
     }
@@ -266,7 +270,11 @@
   function initContactForm() {
     var form = document.getElementById('contactForm');
     var success = document.getElementById('formSuccess');
-    if (!form || !success) return;
+    var error = document.getElementById('formError');
+    var submitBtn = document.getElementById('formSubmit');
+    if (!form || !success || !error || !submitBtn) return;
+
+    var endpoint = form.getAttribute('data-endpoint');
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -274,9 +282,52 @@
         form.reportValidity();
         return;
       }
-      success.classList.add('show');
-      form.reset();
-      setTimeout(function () { success.classList.remove('show'); }, 5000);
+
+      success.classList.remove('show');
+      error.classList.remove('show');
+
+      if (!endpoint || endpoint.indexOf('YOUR-WORKER-SUBDOMAIN') !== -1) {
+        console.warn('Contact form endpoint is not configured (data-endpoint on #contactForm).');
+        error.classList.add('show');
+        return;
+      }
+
+      var lang = root.getAttribute('lang') || 'uz';
+      var dict = translations[lang] || translations.uz;
+      var originalLabel = submitBtn.textContent;
+
+      submitBtn.setAttribute('disabled', 'disabled');
+      submitBtn.textContent = getDictValue(dict, 'form.sending') || originalLabel;
+
+      var payload = {
+        name: form.name.value.trim(),
+        phone: form.phone.value.trim(),
+        message: form.message.value.trim()
+      };
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed: ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          if (!data || data.ok !== true) throw new Error('Server reported failure');
+          success.classList.add('show');
+          form.reset();
+          setTimeout(function () { success.classList.remove('show'); }, 5000);
+        })
+        .catch(function (err) {
+          console.error('Contact form submit failed:', err);
+          error.classList.add('show');
+        })
+        .finally(function () {
+          submitBtn.removeAttribute('disabled');
+          submitBtn.textContent = originalLabel;
+        });
     });
   }
 
