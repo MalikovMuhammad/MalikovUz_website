@@ -61,12 +61,12 @@
       'ctaBanner.cta': "Bog'lanish",
 
       'contacts.tag': "Aloqa",
-      'contacts.title': "Biznesingizni raqamlar bilan kuchaytiramiz",
-      'contacts.subtitle': "Savolingiz bormi? Loyihangizni muhokama qilish uchun biz bilan bog'laning.",
+      'contacts.title': "Biznesingizni raqamlar bilan kuchaytiring",
+      'contacts.subtitle': "Savolingiz bormi? Loyihangizni muhokama qilish uchun bog'laning.",
       'contacts.phoneLabel': "Telefon",
       'contacts.emailLabel': "Email",
       'contacts.addressLabel': "Manzil",
-      'contacts.addressValue': "Toshkent sh., Yunusobod tumani",
+      'contacts.addressValue': "Buxoro sh., 5-mavze",
 
       'form.nameLabel': "Ismingiz",
       'form.namePlaceholder': "Ismingizni kiriting",
@@ -138,12 +138,12 @@
       'ctaBanner.cta': "Связаться",
 
       'contacts.tag': "Контакты",
-      'contacts.title': "Усиливаем ваш бизнес с помощью цифр",
-      'contacts.subtitle': "Остались вопросы? Свяжитесь с нами, чтобы обсудить ваш проект.",
+      'contacts.title': "Усильте ваш бизнес с помощью цифр",
+      'contacts.subtitle': "Остались вопросы? Свяжитесь, чтобы обсудить ваш проект.",
       'contacts.phoneLabel': "Телефон",
       'contacts.emailLabel': "Email",
       'contacts.addressLabel': "Адрес",
-      'contacts.addressValue': "г. Ташкент, Юнусабадский район",
+      'contacts.addressValue': "г. Бухара, 5-й микрорайон",
 
       'form.nameLabel': "Ваше имя",
       'form.namePlaceholder': "Введите ваше имя",
